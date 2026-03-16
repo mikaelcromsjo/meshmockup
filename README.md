@@ -23,7 +23,7 @@ Sandbox demo: enter a YouTube channel → get a branded mug mockup via Gemini.
    export $(cat .env | xargs)
    python api_server.py
 
-6. Open http://localhost:8888
+6. Open http://localhost:8010
 
 ## CLI (no server needed)
 

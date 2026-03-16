@@ -42,6 +42,6 @@ def mockup():
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8888))
+    port = int(os.environ.get("PORT", 8010))
     print(f"🚀 Running on http://localhost:{port}")
     app.run(port=port, debug=True)

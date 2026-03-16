@@ -1,0 +1,7 @@
+.env
+__pycache__/
+*.pyc
+data/sample_mug.png
+output*.png
+venv/
+.venv/

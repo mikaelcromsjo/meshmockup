@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MerchSage — Mockup Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ms-surface: #ffffff;
+      --ms-surface-2: #f8f9fa;
+      --ms-text: #212529;
+      --ms-text-muted: #6c757d;
+      --ms-accent: #111111;
+      --ms-border: #dee2e6;
+      --ms-gold: #D4AF37;
+      --ms-gold-hover: #b8961e;
+      --font: 'Inter', -apple-system, sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font);
+      background: var(--ms-surface-2);
+      color: var(--ms-text);
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+    }
+    nav.landing-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 64px;
+      background: var(--ms-surface);
+      border-bottom: 1px solid var(--ms-border);
+    }
+    .landing-logo { height: 28px; font-size: 1.2rem; font-weight: 700; color: #111; }
+    .nav-badge {
+      font-size: 0.75rem; font-weight: 600; color: var(--ms-text-muted);
+      background: var(--ms-surface-2); border: 1px solid var(--ms-border);
+      border-radius: 999px; padding: 4px 12px;
+    }
+    header.landing-hero {
+      background: var(--ms-surface);
+      border-bottom: 1px solid var(--ms-border);
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+    }
+    .landing-title {
+      font-size: clamp(1.8rem, 4vw, 2.75rem);
+      font-weight: 700; line-height: 1.2;
+      margin-bottom: 1rem; color: var(--ms-accent);
+    }
+    .landing-highlight { color: var(--ms-gold); }
+    .landing-subtitle {
+      font-size: 1.1rem; color: var(--ms-text-muted);
+      max-width: 540px; margin: 0 auto 2rem; line-height: 1.6;
+    }
+    .channel-entry-form { max-width: 520px; margin: 0 auto; }
+    .channel-input-group {
+      display: flex; border-radius: 8px; overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .channel-input {
+      flex: 1; padding: 0.875rem 1rem; font-size: 1rem;
+      font-family: var(--font); border: 1px solid var(--ms-border);
+      border-right: none; border-radius: 8px 0 0 8px; outline: none;
+    }
+    .channel-input:focus { border-color: var(--ms-gold); }
+    .btn-gold {
+      padding: 0.875rem 1.5rem; background: var(--ms-gold); color: #fff;
+      font-size: 1rem; font-weight: 600; font-family: var(--font);
+      border: none; border-radius: 0 8px 8px 0; cursor: pointer;
+      transition: background 0.2s; white-space: nowrap;
+    }
+    .btn-gold:hover { background: var(--ms-gold-hover); }
+    .btn-gold:disabled { opacity: 0.5; cursor: not-allowed; }
+    main { max-width: 800px; margin: 3rem auto; padding: 0 2rem; width: 100%; }
+    .state-card {
+      background: var(--ms-surface); border-radius: 16px;
+      border: 1px solid var(--ms-border);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      padding: 3rem; display: none;
+      flex-direction: column; align-items: center; gap: 1.5rem;
+    }
+    .state-card.visible { display: flex; }
+    .idle-state { border: 2px dashed var(--ms-border) !important; box-shadow: none !important; }
+    .idle-icon { font-size: 3rem; }
+    .idle-text { color: var(--ms-text-muted); font-size: 0.95rem; }
+    .spinner {
+      width: 48px; height: 48px;
+      border: 3px solid var(--ms-border); border-top-color: var(--ms-gold);
+      border-radius: 50%; animation: spin 0.9s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-label {
+      font-size: 1.1rem; font-weight: 500; color: var(--ms-text-muted);
+      min-height: 1.6em; transition: opacity 0.3s;
+    }
+    .loading-sub { font-size: 0.85rem; color: var(--ms-border); }
+    .result-label {
+      font-size: 0.85rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--ms-text-muted);
+    }
+    .result-image {
+      width: 100%; max-width: 480px; border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    }
+    .result-channel { font-size: 1.1rem; font-weight: 600; color: var(--ms-accent); }
+    .btn-reset {
+      padding: 0.75rem 1.5rem; background: transparent;
+      color: var(--ms-text-muted); font-size: 0.95rem;
+      font-family: var(--font); border: 1px solid var(--ms-border);
+      border-radius: 8px; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-reset:hover { border-color: var(--ms-accent); color: var(--ms-accent); }
+    footer.landing-footer {
+      text-align: center; padding: 1.5rem; color: var(--ms-text-muted);
+      font-size: 0.875rem; border-top: 1px solid var(--ms-border);
+      background: var(--ms-surface); margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+  <nav class="landing-nav">
+    <span class="landing-logo">MerchSage</span>
+    <span class="nav-badge">🧪 Sandbox Demo</span>
+  </nav>
+
+  <header class="landing-hero">
+    <h1 class="landing-title">Instant Merch, <span class="landing-highlight">Zero Effort.</span></h1>
+    <p class="landing-subtitle">Enter any YouTube channel and watch MerchSage generate a branded mug mockup in seconds.</p>
+    <form class="channel-entry-form" id="demoForm">
+      <div class="channel-input-group">
+        <input type="text" class="channel-input" id="channelInput"
+               placeholder="Enter @handle or YouTube URL" autocomplete="off">
+        <button type="submit" class="btn-gold" id="submitBtn">Generate Mockup</button>
+      </div>
+    </form>
+  </header>
+
+  <main>
+    <div class="state-card idle-state visible" id="idleState">
+      <div class="idle-icon">☕</div>
+      <p class="idle-text">Your mockup will appear here</p>
+    </div>
+    <div class="state-card" id="loadingState">
+      <div class="spinner"></div>
+      <div class="loading-label" id="loadingLabel">Initializing...</div>
+      <div class="loading-sub">This usually takes 15–30 seconds</div>
+    </div>
+    <div class="state-card" id="resultState">
+      <div class="result-label">Your mockup is ready ✨</div>
+      <div class="result-channel" id="resultChannel"></div>
+      <img class="result-image" id="resultImage" src="" alt="Generated mockup">
+      <button class="btn-reset" id="resetBtn">Try another channel →</button>
+    </div>
+  </main>
+
+  <footer class="landing-footer">
+    <p>© 2026 MerchSage. Sandbox — not for production use.</p>
+  </footer>
+
+  <script>
+    const phrases = [
+      "Generating the universe...",
+      "Compiling the cup...",
+      "Answering the meaning of life...",
+      "Convincing the AI to be creative...",
+      "Negotiating with the pixels...",
+      "Teaching Gemini about mugs...",
+      "Summoning the design spirits...",
+      "Arguing with the color palette...",
+      "Applying logo at quantum level...",
+      "Asking Printful nicely...",
+      "Running on pure caffeine...",
+      "Loading existential dread... just kidding",
+      "Consulting the merch oracle...",
+      "Making it look expensive...",
+    ];
+    let phraseInterval = null;
+
+    function showPhrase() {
+      const label = document.getElementById("loadingLabel");
+      label.style.opacity = 0;
+      setTimeout(() => {
+        label.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+        label.style.opacity = 1;
+      }, 200);
+    }
+
+    function setState(state) {
+      ["idleState","loadingState","resultState"].forEach(id => {
+        document.getElementById(id).classList.remove("visible");
+      });
+      document.getElementById(
+        state === "idle" ? "idleState" : state === "loading" ? "loadingState" : "resultState"
+      ).classList.add("visible");
+    }
+
+    document.getElementById("demoForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const channel = document.getElementById("channelInput").value.trim();
+      if (!channel) return;
+      document.getElementById("submitBtn").disabled = true;
+      setState("loading");
+      showPhrase();
+      phraseInterval = setInterval(showPhrase, 2800);
+      try {
+        const res = await fetch("/api/sandbox/mockup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ channel_url: channel }),
+        });
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || "Unknown error");
+        }
+        const data = await res.json();
+        document.getElementById("resultChannel").textContent = data.channel_name;
+        document.getElementById("resultImage").src = data.image_url;
+        setState("result");
+      } catch (err) {
+        alert("Something went wrong: " + err.message);
+        setState("idle");
+      } finally {
+        clearInterval(phraseInterval);
+        document.getElementById("submitBtn").disabled = false;
+      }
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      document.getElementById("channelInput").value = "";
+      setState("idle");
+    });
+  </script>
+</body>
+</html>
